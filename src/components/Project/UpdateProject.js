@@ -1,65 +1,157 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import classnames from "classnames";
+import { getProject, updateProject } from "../../actions/projectActions";
 
 class UpdateProject extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      id: "",
+      projectName: "",
+      projectIdentifier: "",
+      description: "",
+      start_date: "",
+      end_date: "",
+      errors: {}
+    };
+  }
+
+  componentDidMount = async () => {
+    const { id } = this.props.match.params;
+    await this.props.getProject(id);
+    const { project } = this.props.projects;
+
+    this.setState({
+      projectName: project.projectName,
+      projectIdentifier: project.projectIdentifier,
+      description: project.description,
+      start_date: project.start_date,
+      end_date: project.end_date
+    });
+  };
+
+  handleOnChange = event => {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+  };
+
+  handleOnSubmit = event => {
+    event.preventDefault();
+    const {
+      projectName,
+      projectIdentifier,
+      description,
+      start_date,
+      end_date
+    } = this.state;
+
+    const { project } = this.props.projects;
+    const updateProject = {
+      id: project.id,
+      projectName,
+      projectIdentifier,
+      description,
+      start_date,
+      end_date
+    };
+    this.props.updateProject(
+      projectIdentifier,
+      updateProject,
+      this.props.history
+    );
+  };
+
+  componentWillReceiveProps = nextProps => {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
+    console.log(nextProps.errors);
+  };
+
   render() {
+    //    const { project } = this.props.projects;
+
+    const {
+      projectName,
+      projectIdentifier,
+      description,
+      start_date,
+      end_date,
+      errors
+    } = this.state;
     return (
-      <div className="add-PBI">
+      <div className="project">
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
-              <a href="#" className="btn btn-light">
-                Back to Project Board
-              </a>
-              <h4 className="display-4 text-center">Update Project Task</h4>
-              <p className="lead text-center">Project Name + Project Code</p>
-              <form onSubmit={this.onSubmit}>
+              <h5 className="display-4 text-center"> Edit Project form</h5>
+              <hr />
+              <form onSubmit={this.handleOnSubmit}>
+                <div className="form-group">
+                  <input
+                    type="text"
+                    className={classnames("form-control form-control-lg", {
+                      "is-invalid": errors.projectName
+                    })}
+                    placeholder="Project Name"
+                    value={projectName}
+                    name="projectName"
+                    onChange={this.handleOnChange}
+                    required
+                  />
+                  {errors.projectName && (
+                    <div className="invalid-feedback">{errors.projectName}</div>
+                  )}
+                </div>
                 <div className="form-group">
                   <input
                     type="text"
                     className="form-control form-control-lg"
-                    name="summary"
-                    placeholder="Project Task summary"
+                    placeholder="Unique Project ID"
+                    name="projectIdentifier"
+                    value={projectIdentifier}
+                    disabled
                   />
                 </div>
+
                 <div className="form-group">
                   <textarea
-                    className="form-control form-control-lg"
-                    placeholder="Acceptance Criteria"
-                    name="acceptanceCriteria"
+                    className={classnames("form-control form-control-lg", {
+                      "is-invalid": errors.description
+                    })}
+                    placeholder="Project Description"
+                    value={description}
+                    name="description"
+                    onChange={this.handleOnChange}
+                    required
                   ></textarea>
+                  {errors.projectName && (
+                    <div className="invalid-feedback">{errors.description}</div>
+                  )}
                 </div>
-                <h6>Due Date</h6>
+                <h6>Start Date</h6>
                 <div className="form-group">
                   <input
                     type="date"
                     className="form-control form-control-lg"
-                    name="dueDate"
+                    name="start_date"
+                    value={start_date}
+                    onChange={this.handleOnChange}
                   />
                 </div>
+                <h6>Estimated End Date</h6>
                 <div className="form-group">
-                  <select
+                  <input
+                    type="date"
                     className="form-control form-control-lg"
-                    name="priority"
-                  >
-                    <option value={0}>Select Priority</option>
-                    <option value={1}>High</option>
-                    <option value={2}>Medium</option>
-                    <option value={3}>Low</option>
-                  </select>
-                </div>
-
-                <div className="form-group">
-                  <select
-                    className="form-control form-control-lg"
-                    name="status"
-                  >
-                    <option value="">Select Status</option>
-                    <option value="TO_DO">TO DO</option>
-                    <option value="IN_PROGRESS">IN PROGRESS</option>
-                    <option value="DONE">DONE</option>
-                  </select>
+                    name="end_date"
+                    value={end_date}
+                    onChange={this.handleOnChange}
+                  />
                 </div>
 
                 <input
@@ -75,4 +167,18 @@ class UpdateProject extends Component {
   }
 }
 
-export default UpdateProject;
+UpdateProject.propTypes = {
+  getProject: PropTypes.func.isRequired,
+  projects: PropTypes.object.isRequired,
+  updateProject: PropTypes.func.isRequired,
+  errors: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  projects: state.projects,
+  errors: state.errors
+  // this.props.project =>> const {project} = this.props.projects =>> state.projects.project
+});
+export default connect(mapStateToProps, { getProject, updateProject })(
+  UpdateProject
+);

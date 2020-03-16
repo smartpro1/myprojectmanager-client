@@ -1,10 +1,16 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { deleteProject } from "../../actions/projectActions";
 
 class ProjectItem extends Component {
   constructor(props) {
     super(props);
   }
+
+  deleteItem = projectIdentifier => {
+    this.props.deleteProject(projectIdentifier);
+  };
 
   render() {
     const { project } = this.props;
@@ -32,11 +38,14 @@ class ProjectItem extends Component {
                     <i className="fa fa-edit pr-1"> Update Project Info</i>
                   </li>
                 </Link>
-                <a href="">
+                <Link
+                  to="/dashboard"
+                  onClick={() => this.deleteItem(project.projectIdentifier)}
+                >
                   <li className="list-group-item delete">
                     <i className="fa fa-minus-circle pr-1"> Delete Project</i>
                   </li>
-                </a>
+                </Link>
               </ul>
             </div>
           </div>
@@ -46,4 +55,4 @@ class ProjectItem extends Component {
   }
 }
 
-export default ProjectItem;
+export default connect(null, { deleteProject })(ProjectItem);

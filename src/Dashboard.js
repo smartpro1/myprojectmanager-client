@@ -6,12 +6,14 @@ import PropTypes from "prop-types";
 import { getProjects } from "./actions/projectActions";
 
 class Dashboard extends Component {
-  constructor() {
-    super();
-  }
   componentDidMount = async () => {
     await this.props.getProjects();
   };
+
+  componentWillReceiveProps = nextProps => {
+    // console.log(nextProps);
+  };
+
   render() {
     const { projects } = this.props.projects;
 
@@ -42,6 +44,7 @@ Dashboard.propTypes = {
 
 const mapStateToProps = state => ({
   projects: state.projects
+  //project: state.projects
 });
 
 export default connect(mapStateToProps, { getProjects })(Dashboard);
