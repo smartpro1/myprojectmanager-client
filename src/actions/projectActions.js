@@ -9,7 +9,7 @@ import {
 
 export const createProject = (project, history) => async dispatch => {
   try {
-    await axios.post("http://localhost:8080/api/project", project);
+    await axios.post("/api/project", project);
     history.push("/dashboard");
     dispatch({
       type: GET_ERRORS,
@@ -24,27 +24,22 @@ export const createProject = (project, history) => async dispatch => {
 };
 
 export const getProjects = () => async dispatch => {
-  const res = await axios.get("http://localhost:8080/api/project");
+  const res = await axios.get("/api/project");
   dispatch({
     type: GET_PROJECTS,
     payload: res.data
   });
 };
 
-export const getProject = projectIdentifier => async dispatch => {
+export const getProject = (projectIdentifier, history) => async dispatch => {
   try {
-    const res = await axios.get(
-      `http://localhost:8080/api/project/${projectIdentifier}`
-    );
+    const res = await axios.get(`/api/project/${projectIdentifier}`);
     dispatch({
       type: GET_PROJECT,
       payload: res.data
     });
   } catch (err) {
-    dispatch({
-      type: GET_ERRORS,
-      payload: err.response.data
-    });
+    history.push("/dashboard");
   }
 };
 
@@ -54,10 +49,7 @@ export const updateProject = (
   history
 ) => async dispatch => {
   try {
-    const res = await axios.put(
-      `http://localhost:8080/api/project/${projectIdentifier}`,
-      project
-    );
+    const res = await axios.put(`/api/project/${projectIdentifier}`, project);
     history.push("/dashboard");
     dispatch({
       type: UPDATE_PROJECT,
@@ -74,13 +66,15 @@ export const updateProject = (
 
 export const deleteProject = projectIdentifier => async dispatch => {
   try {
-    const res = await axios.delete(
-      `http://localhost:8080/api/project/${projectIdentifier}`
-    );
-    dispatch({
-      type: DELETE_PROJECT,
-      payload: projectIdentifier
-    });
+    if (
+      window.confirm("Are you sure you really want to delete this project?")
+    ) {
+      const res = await axios.delete(`/api/project/${projectIdentifier}`);
+      dispatch({
+        type: DELETE_PROJECT,
+        payload: projectIdentifier
+      });
+    }
   } catch (err) {
     dispatch({
       type: GET_ERRORS,

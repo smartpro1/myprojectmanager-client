@@ -10,7 +10,7 @@ const initialState = {
   project: {}
 };
 
-export const getProjectReducer = (state = initialState, action) => {
+export const projectReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_PROJECTS:
       return {

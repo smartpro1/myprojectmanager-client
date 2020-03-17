@@ -21,7 +21,7 @@ class UpdateProject extends Component {
 
   componentDidMount = async () => {
     const { id } = this.props.match.params;
-    await this.props.getProject(id);
+    await this.props.getProject(id, this.props.history);
     const { project } = this.props.projects;
 
     this.setState({
