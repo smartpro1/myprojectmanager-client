@@ -101,7 +101,6 @@ class UpdateProject extends Component {
                     value={projectName}
                     name="projectName"
                     onChange={this.handleOnChange}
-                    required
                   />
                   {errors.projectName && (
                     <div className="invalid-feedback">{errors.projectName}</div>
@@ -127,7 +126,6 @@ class UpdateProject extends Component {
                     value={description}
                     name="description"
                     onChange={this.handleOnChange}
-                    required
                   ></textarea>
                   {errors.projectName && (
                     <div className="invalid-feedback">{errors.description}</div>
