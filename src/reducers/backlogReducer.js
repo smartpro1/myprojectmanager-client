@@ -5,16 +5,17 @@ import {
 } from "../actions/types";
 
 const initialState = {
-  backlog: [],
+  projectTasks: [],
   projectTask: {}
 };
 
 export const backlogReducer = (state = initialState, action) => {
-  switch (action.payload) {
-    case GET_BACKLOG:
+  switch (action.type) {
+    case "GET_BACKLOG":
+      console.log("cool");
       return {
         ...state,
-        backlog: action.payload
+        projectTasks: action.payload
       };
 
     case GET_PROJECT_TASK:
