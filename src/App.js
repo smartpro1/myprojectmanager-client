@@ -8,6 +8,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import ProjectBoard from "./components/ProjectBoard/ProjectBoard";
 import AddProjectTask from "./components/ProjectBoard/ProjectTasks/AddProjectTask";
+import UpdateProjectTask from "./components/ProjectBoard/ProjectTasks/UpdateProjectTask";
 
 function App() {
   return (
@@ -19,6 +20,11 @@ function App() {
         <Route exact path="/updateProject/:id" component={UpdateProject} />
         <Route exact path="/projectBoard/:id" component={ProjectBoard} />
         <Route exact path="/addProjectTask/:id" component={AddProjectTask} />
+        <Route
+          exact
+          path="/updateProjectTask/:id/:id"
+          component={UpdateProjectTask}
+        />
       </div>
     </Router>
   );

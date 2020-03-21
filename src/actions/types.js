@@ -9,4 +9,5 @@ export const DELETE_PROJECT = "DELETE_PROJECT";
 // Backlog Actions
 export const GET_BACKLOG = "GET_BACKLOG";
 export const GET_PROJECT_TASK = "GET_PROJECT_TASKS";
+export const UPDATE_PROJECT_TASK = "UPDATE_PROJECT_TASk";
 export const DELETE_PROJECT_TASK = "DELETE_PROJECT_TASK";
