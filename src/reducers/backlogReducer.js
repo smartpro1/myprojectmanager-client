@@ -11,8 +11,7 @@ const initialState = {
 
 export const backlogReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "GET_BACKLOG":
-      console.log("cool");
+    case GET_BACKLOG:
       return {
         ...state,
         projectTasks: action.payload

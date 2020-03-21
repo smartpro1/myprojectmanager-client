@@ -3,6 +3,25 @@ import ProjectTask from "./ProjectTasks/ProjectTask";
 
 class Backlog extends Component {
   render() {
+    const { projectTasks } = this.props;
+
+    const result = projectTasks.map(projectTask => (
+      <ProjectTask key={projectTask.id} projectTask={projectTask} />
+    ));
+
+    let todoItems = [],
+      inProgressItems = [],
+      doneItems = [];
+    for (let i = 0; i < result.length; i++) {
+      if (result[i].props.projectTask.status === "TO_DO") {
+        todoItems.push(result[i]);
+      } else if (result[i].props.projectTask.status === "IN_PROGRESS") {
+        inProgressItems.push(result[i]);
+      } else {
+        doneItems.push(result[i]);
+      }
+    }
+
     return (
       <div className="container">
         <div className="row">
@@ -13,14 +32,7 @@ class Backlog extends Component {
               </div>
             </div>
 
-            {
-              //<!-- SAMPLE PROJECT TASK STARTS HERE -->
-            }
-            <ProjectTask />
-
-            {
-              //<!-- SAMPLE PROJECT TASK ENDS HERE -->
-            }
+            {todoItems}
           </div>
           <div className="col-md-4">
             <div className="card text-center mb-2">
@@ -28,13 +40,7 @@ class Backlog extends Component {
                 <h3>In Progress</h3>
               </div>
             </div>
-            {
-              // <!-- SAMPLE PROJECT TASK STARTS HERE -->
-            }
-            <ProjectTask />
-            {
-              //  <!-- SAMPLE PROJECT TASK ENDS HERE -->
-            }
+            {inProgressItems}
           </div>
           <div className="col-md-4">
             <div className="card text-center mb-2">
@@ -42,14 +48,7 @@ class Backlog extends Component {
                 <h3>Done</h3>
               </div>
             </div>
-            {
-              //<!-- SAMPLE PROJECT TASK STARTS HERE -->
-            }
-            <ProjectTask />
-
-            {
-              //<!-- SAMPLE PROJECT TASK ENDS HERE -->
-            }
+            {doneItems}
           </div>
         </div>
       </div>
