@@ -47,15 +47,22 @@ class UpdateProjectTask extends Component {
     });
   };
 
+  getProjectIdentifier = () => {
+    const { url } = this.props.match;
+    let projectIdentifier = url.split("/");
+    return projectIdentifier[projectIdentifier.length - 2];
+  };
+
   handleOnSubmit = event => {
     event.preventDefault();
     const projectSequence = this.props.match.params.id;
-    let { url } = this.props.match;
-    let projectIdentifier = url.split("/");
-    projectIdentifier = projectIdentifier[projectIdentifier.length - 2];
+    // let { url } = this.props.match;
+    // let projectIdentifier = url.split("/");
+    // projectIdentifier = projectIdentifier[projectIdentifier.length - 2];
+    const projectIdentifier = this.getProjectIdentifier();
     const { id } = this.props.backlog.projectTask;
     const { updateProjectTask, history } = this.props;
-    console.log({ updateProjectTask, history });
+
     const {
       summary,
       acceptanceCriteria,
@@ -98,7 +105,10 @@ class UpdateProjectTask extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
-              <Link to={``} className="btn btn-light">
+              <Link
+                to={`/projectBoard/${this.getProjectIdentifier()}`}
+                className="btn btn-light"
+              >
                 Back to Project Board
               </Link>
               <h4 className="display-4 text-center">Update Project Task</h4>

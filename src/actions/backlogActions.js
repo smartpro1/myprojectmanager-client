@@ -3,7 +3,8 @@ import {
   GET_ERRORS,
   GET_BACKLOG,
   UPDATE_PROJECT_TASK,
-  GET_PROJECT_TASK
+  GET_PROJECT_TASK,
+  DELETE_PROJECT_TASK
 } from "./types";
 
 export const addProjectTask = (
@@ -76,6 +77,24 @@ export const getProjectTask = (
     dispatch({
       type: GET_PROJECT_TASK,
       payload: res.data
+    });
+  } catch (err) {
+    dispatch({
+      type: GET_ERRORS,
+      payload: err.response.data
+    });
+  }
+};
+
+export const deleteProjectTask = (
+  projectIdentifier,
+  projectSequence
+) => async dispatch => {
+  try {
+    await axios.delete(`/api/backlog/${projectIdentifier}/${projectSequence}`);
+    dispatch({
+      type: DELETE_PROJECT_TASK,
+      payload: projectSequence
     });
   } catch (err) {
     dispatch({
