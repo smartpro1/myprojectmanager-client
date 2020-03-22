@@ -2,7 +2,11 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import classnames from "classnames";
 import { Link } from "react-router-dom";
-import { updateProjectTask } from "../../../actions/backlogActions";
+import PropTypes from "prop-types";
+import {
+  updateProjectTask,
+  getProjectTask
+} from "../../../actions/backlogActions";
 
 class UpdateProjectTask extends Component {
   constructor(props) {
@@ -13,16 +17,45 @@ class UpdateProjectTask extends Component {
       acceptanceCriteria: "",
       status: "",
       priority: "",
-      dueDate: ""
+      dueDate: "",
+      errors: {}
     };
   }
+
+  componentDidMount = async () => {
+    const projectSequence = this.props.match.params.id;
+    let { url } = this.props.match;
+    let projectIdentifier = url.split("/");
+    projectIdentifier = projectIdentifier[projectIdentifier.length - 2];
+    await this.props.getProjectTask(projectIdentifier, projectSequence);
+
+    const { projectTask } = this.props.backlog;
+    const {
+      summary,
+      acceptanceCriteria,
+      status,
+      priority,
+      dueDate
+    } = projectTask;
+
+    this.setState({ summary, acceptanceCriteria, status, priority, dueDate });
+  };
 
   handleOnChange = event => {
     this.setState({
       [event.target.name]: event.target.value
     });
   };
-  render() {
+
+  handleOnSubmit = event => {
+    event.preventDefault();
+    const projectSequence = this.props.match.params.id;
+    let { url } = this.props.match;
+    let projectIdentifier = url.split("/");
+    projectIdentifier = projectIdentifier[projectIdentifier.length - 2];
+    const { id } = this.props.backlog.projectTask;
+    const { updateProjectTask, history } = this.props;
+    console.log({ updateProjectTask, history });
     const {
       summary,
       acceptanceCriteria,
@@ -30,6 +63,36 @@ class UpdateProjectTask extends Component {
       priority,
       dueDate
     } = this.state;
+    const updateProjTask = {
+      id,
+      projectSequence,
+      projectIdentifier,
+      summary,
+      acceptanceCriteria,
+      status,
+      priority,
+      dueDate
+    };
+
+    updateProjectTask(
+      projectIdentifier,
+      projectSequence,
+      updateProjTask,
+      history
+    );
+    console.log(updateProjTask);
+  };
+
+  render() {
+    const {
+      summary,
+      acceptanceCriteria,
+      status,
+      priority,
+      dueDate,
+      errors
+    } = this.state;
+
     return (
       <div className="add-PBI">
         <div className="container">
@@ -40,7 +103,7 @@ class UpdateProjectTask extends Component {
               </Link>
               <h4 className="display-4 text-center">Update Project Task</h4>
               <p className="lead text-center">Project Name + Project Code</p>
-              <form onSubmit={this.onSubmit}>
+              <form onSubmit={this.handleOnSubmit}>
                 <div className="form-group">
                   <input
                     type="text"
@@ -111,4 +174,18 @@ class UpdateProjectTask extends Component {
   }
 }
 
-export default UpdateProjectTask;
+UpdateProjectTask.propTypes = {
+  errors: PropTypes.object.isRequired,
+  backlog: PropTypes.object.isRequired,
+  updateProjectTask: PropTypes.func.isRequired,
+  getProjectTask: PropTypes.func.isRequired
+};
+
+const mapStateToProps = state => ({
+  errors: state.errors,
+  backlog: state.backlog
+});
+
+export default connect(mapStateToProps, { updateProjectTask, getProjectTask })(
+  UpdateProjectTask
+);

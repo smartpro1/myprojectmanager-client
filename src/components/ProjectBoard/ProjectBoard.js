@@ -53,20 +53,20 @@ class ProjectBoard extends Component {
           );
         }
       } else {
-        return (
-          <div className="container">
-            <Link to={`/addProjectTask/${id}`} className="btn btn-primary mb-3">
-              <i className="fas fa-plus-circle"> Create Project Task</i>
-            </Link>
-            <br />
-            <hr />
-            <Backlog projectTasks={projectTasks} />
-          </div>
-        );
+        return <Backlog projectTasks={projectTasks} />;
       }
     };
 
-    return displayProjectTasks(errors, projectTasks);
+    return (
+      <div className="container">
+        <Link to={`/addProjectTask/${id}`} className="btn btn-primary mb-3">
+          <i className="fas fa-plus-circle"> Create Project Task</i>
+        </Link>
+        <br />
+        <hr />
+        {displayProjectTasks(errors, projectTasks)}
+      </div>
+    );
   }
 }
 
