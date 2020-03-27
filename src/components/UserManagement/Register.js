@@ -1,7 +1,38 @@
 import React, { Component } from "react";
 
 class Register extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      fullname: "",
+      username: "",
+      password: "",
+      confirmPassword: ""
+    };
+  }
+
+  handleOnChange = event => {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+  };
+
+  handleOnSubmit = event => {
+    event.preventDefault();
+    const { fullname, username, password, confirmPassword } = this.state;
+    const newUser = {
+      fullname,
+      username,
+      password,
+      confirmPassword
+    };
+
+    console.log(newUser);
+  };
+
   render() {
+    const { fullname, username, password, confirmPassword } = this.state;
     return (
       <div className="register">
         <div className="container">
@@ -9,13 +40,15 @@ class Register extends Component {
             <div className="col-md-8 m-auto">
               <h1 className="display-4 text-center">Sign Up</h1>
               <p className="lead text-center">Create your Account</p>
-              <form action="create-profile.html">
+              <form onSubmit={this.handleOnSubmit}>
                 <div className="form-group">
                   <input
                     type="text"
                     className="form-control form-control-lg"
-                    placeholder="Name"
-                    name="name"
+                    placeholder="fullname"
+                    name="fullname"
+                    value={fullname}
+                    onChange={this.handleOnChange}
                     required
                   />
                 </div>
@@ -24,7 +57,10 @@ class Register extends Component {
                     type="email"
                     className="form-control form-control-lg"
                     placeholder="Email Address"
-                    name="email"
+                    name="username"
+                    value={username}
+                    onChange={this.handleOnChange}
+                    required
                   />
                 </div>
                 <div className="form-group">
@@ -33,6 +69,9 @@ class Register extends Component {
                     className="form-control form-control-lg"
                     placeholder="Password"
                     name="password"
+                    value={password}
+                    onChange={this.handleOnChange}
+                    required
                   />
                 </div>
                 <div className="form-group">
@@ -40,7 +79,10 @@ class Register extends Component {
                     type="password"
                     className="form-control form-control-lg"
                     placeholder="Confirm Password"
-                    name="password2"
+                    name="confirmPassword"
+                    value={confirmPassword}
+                    onChange={this.handleOnChange}
+                    required
                   />
                 </div>
                 <input type="submit" className="btn btn-info btn-block mt-4" />
