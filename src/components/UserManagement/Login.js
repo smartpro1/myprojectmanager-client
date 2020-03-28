@@ -1,6 +1,14 @@
 import React, { Component } from "react";
 
 class Login extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      username: "",
+      password: ""
+    };
+  }
   render() {
     return (
       <div className="login">
@@ -15,6 +23,7 @@ class Login extends Component {
                     className="form-control form-control-lg"
                     placeholder="Email Address"
                     name="email"
+                    required
                   />
                 </div>
                 <div className="form-group">
@@ -23,6 +32,7 @@ class Login extends Component {
                     className="form-control form-control-lg"
                     placeholder="Password"
                     name="password"
+                    required
                   />
                 </div>
                 <input type="submit" className="btn btn-info btn-block mt-4" />

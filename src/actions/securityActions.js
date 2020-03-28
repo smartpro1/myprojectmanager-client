@@ -1,4 +1,4 @@
-import axios from "/axios";
+import axios from "axios";
 import { GET_ERRORS } from "./types";
 
 export const registerUser = (newUser, history) => async dispatch => {
