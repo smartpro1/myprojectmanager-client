@@ -13,4 +13,4 @@ export const UPDATE_PROJECT_TASK = "UPDATE_PROJECT_TASk";
 export const DELETE_PROJECT_TASK = "DELETE_PROJECT_TASK";
 
 // Security Actions
-export const REGISTER_USER = "REGISTER_USER";
+export const LOGIN_USER = "LOGIN_USER";

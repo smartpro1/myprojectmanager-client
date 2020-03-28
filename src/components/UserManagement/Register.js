@@ -81,6 +81,7 @@ class Register extends Component {
                     name="fullname"
                     value={fullname}
                     onChange={this.handleOnChange}
+                    required
                   />
                   {errors.fullname && (
                     <div className="invalid-feedback">{errors.fullname}</div>
@@ -99,9 +100,10 @@ class Register extends Component {
                     name="username"
                     value={username}
                     onChange={this.handleOnChange}
+                    required
                   />
-                  {errors.error && (
-                    <div className="invalid-feedback">{errors.error}</div>
+                  {errors.username && (
+                    <div className="invalid-feedback">{errors.username}</div>
                   )}
                 </div>
                 <div className="form-group">
@@ -114,6 +116,7 @@ class Register extends Component {
                     name="password"
                     value={password}
                     onChange={this.handleOnChange}
+                    required
                   />
                   {errors.password && (
                     <div className="invalid-feedback">{errors.password}</div>
@@ -129,6 +132,7 @@ class Register extends Component {
                     name="confirmPassword"
                     value={confirmPassword}
                     onChange={this.handleOnChange}
+                    required
                   />
                   {errors.confirmPassword && (
                     <div className="invalid-feedback">

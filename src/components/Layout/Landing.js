@@ -9,15 +9,16 @@ class Landing extends Component {
           <div className="container">
             <div className="row">
               <div className="col-md-12 text-center">
-                <h1 className="display-3 mb-4">Personal Management App</h1>
+                <h1 className="display-3 mb-4">Hi, I'm your project manager</h1>
                 <p className="lead">
-                  Create your account to join manage your projects
+                  Create your account to effectively manage your projects from
+                  start to finish
                 </p>
                 <hr />
-                <Link to="/register" className="btn btn-lg btn-primary mr-2">
+                <Link to="/register" className="btn btn-lg btn-info mr-2">
                   Sign Up
                 </Link>
-                <Link to="/login" className="btn btn-lg btn-secondary mr-2">
+                <Link to="/login" className="btn btn-lg btn-success mr-2">
                   Login
                 </Link>
               </div>
