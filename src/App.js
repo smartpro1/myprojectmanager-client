@@ -12,8 +12,28 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import Register from "./components/UserManagement/Register";
 import Login from "./components/UserManagement/Login";
+import jwtDecode from "jwt-decode";
+import { setJwtToken } from "./securityUtils/setJwtToken";
+import { LOGIN_USER } from "./actions/types";
+import store from "./store";
 
 function App() {
+  const jwtToken = localStorage.jwtToken;
+  if (jwtToken) {
+    setJwtToken(jwtToken);
+    const decodedToken = jwtDecode(jwtToken);
+    store.dispatch({
+      type: LOGIN_USER,
+      payload: decodedToken
+    });
+
+    const currentTime = Date.now();
+    if (decodedToken.exp < currentTime) {
+      console.log({ decodedToken });
+      console.log({ currentTime });
+      window.location.href = "/";
+    }
+  }
   return (
     <Router>
       <div className="App">
