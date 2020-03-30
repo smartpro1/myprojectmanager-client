@@ -11,15 +11,17 @@ class Landing extends Component {
       <div>
         <h1 className="display-3 mb-4">Hi, I'm your project manager</h1>
         <p className="lead">
-          <mark>Sign Up</mark> or <mark>Login</mark> to effectively manage your
+          <mark>Register</mark> or <mark>Login</mark> to effectively manage your
           projects and sub projects from
           <mark>start</mark> to <mark>finish</mark>
         </p>
         <hr />
-        <Link to="/register" className="btn btn-lg btn-info mr-2">
-          Sign Up
+
+        <Link to="/register" className="btn btn-outline-info btn-lg  mr-2">
+          Register
         </Link>
-        <Link to="/login" className="btn btn-lg btn-success mr-2">
+
+        <Link to="/login" className="btn btn-lg btn-outline-success mr-2">
           Login
         </Link>
       </div>
