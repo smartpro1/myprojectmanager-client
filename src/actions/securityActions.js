@@ -49,8 +49,9 @@ export const loginUser = (userCredentials, history) => async dispatch => {
 
 export const logoutUser = () => dispatch => {
   // remove token from local storage
+  console.log("refreshed page");
   localStorage.removeItem("jwtToken");
-  // delete the header
+  // // delete the header
   setJwtToken(false);
   dispatch({
     type: LOGIN_USER,

@@ -19,22 +19,25 @@ import store from "./store";
 import { logoutUser } from "./actions/securityActions";
 import SecuredRoute from "./securityUtils/SecuredRoute";
 
-function App() {
-  const jwtToken = localStorage.jwtToken;
-  if (jwtToken) {
-    setJwtToken(jwtToken);
-    const decodedToken = jwtDecode(jwtToken);
-    store.dispatch({
-      type: LOGIN_USER,
-      payload: decodedToken
-    });
+const jwtToken = localStorage.jwtToken;
+console.log({ jwtToken });
+if (jwtToken) {
+  console.log("got here");
+  setJwtToken(jwtToken);
+  const decoded_Token = jwtDecode(jwtToken);
+  store.dispatch({
+    type: LOGIN_USER,
+    payload: decoded_Token
+  });
 
-    const currentTime = Date.now();
-    if (decodedToken.exp < currentTime) {
-      store.dispatch(logoutUser());
-      window.location.href = "/";
-    }
+  const currentTime = Date.now() / 1000;
+  if (decoded_Token.exp < currentTime) {
+    store.dispatch(logoutUser());
+    window.location.href = "/";
   }
+}
+
+function App() {
   return (
     <Router>
       <div className="App">
