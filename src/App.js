@@ -51,24 +51,24 @@ function App() {
           // Private
         }
         <Switch>
-          <SecuredRouted exact path="/dashboard" component={Dashboard} />
-          <SecuredRouted exact path="/addProject" component={AddProject} />
-          <SecuredRouted
+          <SecuredRoute exact path="/dashboard" component={Dashboard} />
+          <SecuredRoute exact path="/addProject" component={AddProject} />
+          <SecuredRoute
             exact
             path="/updateProject/:id"
             component={UpdateProject}
           />
-          <SecuredRouted
+          <SecuredRoute
             exact
             path="/projectBoard/:id"
             component={ProjectBoard}
           />
-          <SecuredRouted
+          <SecuredRoute
             exact
             path="/addProjectTask/:id"
             component={AddProjectTask}
           />
-          <SecuredRouted
+          <SecuredRoute
             exact
             path="/updateProjectTask/:id/:id"
             component={UpdateProjectTask}

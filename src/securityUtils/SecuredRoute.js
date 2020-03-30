@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
-import { connect } from "connect";
+import { connect } from "react-redux";
 
 const SecuredRoute = ({ component: Component, user, ...otherProps }) => (
   <Route
