@@ -61,7 +61,7 @@ class Header extends Component {
       <nav className="navbar navbar-expand-sm navbar-dark bg-info mb-5">
         <div className="container">
           <Link className="navbar-brand" to="/">
-            MyProjectManager
+            <i className="fas fa-coffee" /> MyProjectManager
           </Link>
           <button
             className="navbar-toggler"

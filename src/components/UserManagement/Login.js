@@ -40,11 +40,11 @@ class Login extends Component {
     const { username, password, errors } = this.state;
 
     return (
-      <div className="login">
+      <div>
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
-              <h1 className="display-4 text-center">Log In</h1>
+              <h1 className="display-4 text-center mb-4">Log In</h1>
               <form onSubmit={this.handleOnSubmit}>
                 <div className="form-group">
                   <input
@@ -80,9 +80,14 @@ class Login extends Component {
                 </div>
                 <input
                   type="submit"
-                  className="btn btn-success btn-block mt-4"
+                  className="btn btn-primary btn-block mt-4"
                 />
               </form>
+              <p className="small mt-3">
+                <a href="/password" className="text-info">
+                  Forgot password
+                </a>
+              </p>
             </div>
           </div>
         </div>

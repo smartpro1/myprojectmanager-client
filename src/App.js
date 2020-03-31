@@ -20,7 +20,7 @@ import { logoutUser } from "./actions/securityActions";
 import SecuredRoute from "./securityUtils/SecuredRoute";
 
 const jwtToken = localStorage.jwtToken;
-console.log({ jwtToken });
+
 if (jwtToken) {
   console.log("got here");
   setJwtToken(jwtToken);
