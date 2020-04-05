@@ -40,7 +40,7 @@ class Login extends Component {
     const { username, password, errors } = this.state;
 
     return (
-      <div>
+      <div className="login">
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
@@ -84,7 +84,7 @@ class Login extends Component {
                 />
               </form>
               <p className="small mt-3">
-                <a href="/password" className="text-info">
+                <a href="/forgot-password" className="text-info">
                   Forgot password
                 </a>
               </p>

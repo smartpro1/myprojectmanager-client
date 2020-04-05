@@ -18,6 +18,8 @@ import { LOGIN_USER } from "./actions/types";
 import store from "./store";
 import { logoutUser } from "./actions/securityActions";
 import SecuredRoute from "./securityUtils/SecuredRoute";
+import ForgotPassword from "./components/UserManagement/ForgotPassword";
+import ResetPassword from "./components/UserManagement/ResetPassword";
 
 const jwtToken = localStorage.jwtToken;
 
@@ -49,6 +51,8 @@ function App() {
         <Route exact path="/" component={Landing} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/login" component={Login} />
+        <Route exact path="/forgot-password" component={ForgotPassword} />
+        <Route path="/reset" component={ResetPassword} />
 
         {
           // Private
