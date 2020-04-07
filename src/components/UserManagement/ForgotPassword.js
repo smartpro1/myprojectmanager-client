@@ -10,15 +10,17 @@ class ForgotPassword extends Component {
         super();
 
         this.state = {
-            email: "",
-            errors: {}
+            username: "",
+            errors: {},
+            displaySpinner: false
         };
     }
 
     componentWillReceiveProps = nextProps => {
         if (nextProps.errors) {
             this.setState({
-                errors: nextProps.errors
+                errors: nextProps.errors,
+                displaySpinner: false
             });
         }
     };
@@ -31,36 +33,47 @@ class ForgotPassword extends Component {
 
     handleOnSubmit = event => {
         event.preventDefault();
-        const { email } = this.state;
+        this.setState({ displaySpinner: true });
+        const email = this.state.username;
         const userEmail = { email };
         const { forgotPassword, history } = this.props;
-        console.log(userEmail);
         forgotPassword(userEmail, history);
     };
 
     render() {
-        const { email, errors } = this.state;
+        const { username, errors, displaySpinner } = this.state;
+        console.log(displaySpinner);
+        if (displaySpinner) {
+            return (
+                <div className="text-center">
+                    <p className='spinner-border text-primary  my-3'></p>
+                    <p className="my-2">Processing...</p>
+                </div>
+            );
+        }
+
         return (
             <div className="forgot-password">
                 <div className="container">
                     <div className="row">
                         <div className="col-md-8 m-auto">
                             <h1 className="display-4 text-center mb-4">Enter email to reset password</h1>
+
                             <form onSubmit={this.handleOnSubmit}>
                                 <div className="form-group">
                                     <input
                                         type="email"
                                         className={classnames("form-control form-control-lg", {
-                                            "is-invalid": errors.username
+                                            "is-invalid": errors.projectIdentifier
                                         })}
                                         placeholder="Email Address"
-                                        name="email"
-                                        value={email}
+                                        name="username"
+                                        value={username}
                                         onChange={this.handleOnChange}
                                         required
                                     />
-                                    {errors.email && (
-                                        <div className="invalid-feedback">{errors.email}</div>
+                                    {errors.projectIdentifier && (
+                                        <div className="invalid-feedback">{errors.projectIdentifier}</div>
                                     )}
                                 </div>
 

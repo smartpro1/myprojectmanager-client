@@ -24,7 +24,6 @@ import ResetPassword from "./components/UserManagement/ResetPassword";
 const jwtToken = localStorage.jwtToken;
 
 if (jwtToken) {
-  console.log("got here");
   setJwtToken(jwtToken);
   const decoded_Token = jwtDecode(jwtToken);
   store.dispatch({

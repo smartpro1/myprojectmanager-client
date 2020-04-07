@@ -28,7 +28,7 @@ class Backlog extends Component {
           <div className="col-md-4">
             <div className="card text-center mb-2">
               <div className="card-header bg-info text-white">
-                <h3>TO DO</h3>
+                <h3>TO DO  <i className="fas fa-exclamation-circle pl-2" /></h3>
               </div>
             </div>
 
@@ -37,7 +37,7 @@ class Backlog extends Component {
           <div className="col-md-4">
             <div className="card text-center mb-2">
               <div className="card-header bg-warning text-white">
-                <h3>In Progress</h3>
+                <h3>In Progress  <i className="fas fa-folder-open pl-2" /></h3>
               </div>
             </div>
             {inProgressItems}
@@ -45,7 +45,7 @@ class Backlog extends Component {
           <div className="col-md-4">
             <div className="card text-center mb-2">
               <div className="card-header bg-success text-white">
-                <h3>Done</h3>
+                <h3>Done<i className="fas fa-check-circle pl-2" /></h3>
               </div>
             </div>
             {doneItems}

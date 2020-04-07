@@ -17,6 +17,14 @@ class Register extends Component {
     };
   }
 
+  componentWillReceiveProps = nextProps => {
+    if (nextProps.errors) {
+      this.setState({
+        errors: nextProps.errors
+      });
+    }
+  };
+
   handleOnChange = event => {
     this.setState({
       [event.target.name]: event.target.value
@@ -36,18 +44,20 @@ class Register extends Component {
     registerUser(newUser, history);
   };
 
-  componentWillReceiveProps = nextProps => {
-    if (nextProps.errors) {
-      const { fullname, password, confirmPassword } = this.state;
-      this.setState({
-        fullname,
-        username: nextProps.errors.error,
-        password,
-        confirmPassword,
-        errors: nextProps.errors
-      });
-    }
-  };
+  // componentWillReceiveProps = nextProps => {
+  //   if (nextProps.errors) {
+  //     const { fullname, password, confirmPassword } = this.state;
+  //     this.setState({
+  //       fullname,
+  //       username: nextProps.errors.error,
+  //       password,
+  //       confirmPassword,
+  //       errors: nextProps.errors
+  //     });
+  //   }
+  // };
+
+
 
   render() {
     const {
@@ -59,9 +69,14 @@ class Register extends Component {
     } = this.state;
 
     let errorText = "";
+    let usernameError = "";
     if (errors.error) {
       errorText = "border-danger";
+      usernameError = `${username} already exists kindly choose another`;
     }
+
+
+
 
     return (
       <div className="register">
@@ -105,6 +120,9 @@ class Register extends Component {
                   {errors.username && (
                     <div className="invalid-feedback">{errors.username}</div>
                   )}
+                  <p className="small text-danger display-2 mt-2">{usernameError}</p>
+
+
                 </div>
                 <div className="form-group">
                   <input
