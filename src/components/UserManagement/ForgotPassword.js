@@ -42,7 +42,6 @@ class ForgotPassword extends Component {
 
     render() {
         const { username, errors, displaySpinner } = this.state;
-        console.log(displaySpinner);
         if (displaySpinner) {
             return (
                 <div className="text-center">

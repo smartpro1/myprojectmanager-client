@@ -20,6 +20,8 @@ import { logoutUser } from "./actions/securityActions";
 import SecuredRoute from "./securityUtils/SecuredRoute";
 import ForgotPassword from "./components/UserManagement/ForgotPassword";
 import ResetPassword from "./components/UserManagement/ResetPassword";
+import Footer from "./components/Layout/Footer";
+
 
 const jwtToken = localStorage.jwtToken;
 
@@ -80,6 +82,7 @@ function App() {
             component={UpdateProjectTask}
           />
         </Switch>
+        <Footer />
       </div>
     </Router>
   );
